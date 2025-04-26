@@ -1,0 +1,111 @@
+{
+  "TrustServiceStatusList" : {
+    "FrameworkInformation" : {
+      "TSLVersionIdentifier" : 1,
+      "TSLSequenceNumber" : 1,
+      "TSLType" : "http://TRAIN/TrstSvc/TrustedList/TSLType/federation1-POC",
+      "FrameworkOperatorName" : {
+        "Name" : "Federation 1"
+      },
+      "FrameworkOperatorAddress" : {
+        "PostalAddresses" : {
+          "PostalAddress" : [ {
+            "StreetAddress" : "Hauptstrasse",
+            "Locality" : "Stuttgart",
+            "PostalCode" : "70563",
+            "CountryName" : "DE"
+          } ]
+        },
+        "ElectronicAddress" : {
+          "URI" : "mailto:admin@federation1.train"
+        }
+      },
+      "FrameworkName" : {
+        "Name" : "bob.trust.train1.xfsc.dev"
+      },
+      "FrameworkInformationURI" : {
+        "URI" : "https://TRAIN/interoperability/federation-Directory"
+      },
+      "FrameworkAuditURI" : {
+        "URI" : "https://TRAIN/interoperability/Audit"
+      },
+      "FrameworkTypeCommunityRules" : {
+        "URI" : "https://TrustFramework_TRAIN.example.com/en/federation1-dir-rules.html"
+      },
+      "FrameworkScope" : "EU",
+      "PolicyOrLegalNotice" : {
+        "TSLLegalNotice" : "The applicable legal framework for the present trusted list is TBD. Valid legal notice text will be created."
+      },
+      "ListIssueDateTime" : "2023-12-15T00:00:00Z"
+    },
+    "TrustServiceProviderList" : {
+      "TrustServiceProvider" : [ {
+        "UUID" : "1-company-bobs_burgers",
+        "TSPName" : "bobs-burgers",
+        "TSPTradeName" : "Bobs Burgers",
+        "TSPInformation" : {
+          "Address" : {
+            "ElectronicAddress" : "info@burgers.de",
+            "PostalAddress" : {
+              "City" : "Stuttgart",
+              "Country" : "DE",
+              "PostalCode" : "11111",
+              "State" : "BW",
+              "StreetAddress1" : "Hauptstr",
+              "StreetAddress2" : "071"
+            }
+          },
+          "TSPCertificationList" : {
+            "TSPCertification" : [ {
+              "Type" : "ISO:9001",
+              "Value" : "4356546745"
+            }, {
+              "Type" : "EU-VAT",
+              "Value" : "4356546745"
+            } ]
+          },
+          "TSPEntityIdentifierList" : {
+            "TSPEntityIdendifier" : [ {
+              "Type" : "vLEI",
+              "Value" : "3453654764"
+            }, {
+              "Type" : "VAT",
+              "Value" : "3453654764"
+            } ]
+          },
+          "TSPInformationURI" : "string"
+        },
+        "TSPServices" : {
+          "TSPService" : [ {
+            "ServiceName" : "Federation Notary",
+            "ServiceTypeIdentifier" : "did:web:bobs-burgers.de",
+            "ServiceCurrentStatus" : "string",
+            "StatusStartingTime" : "string",
+            "ServiceDefinitionURI" : "string",
+            "ServiceDigitalIdentity" : {
+              "DigitalId" : {
+                "X509Certificate" : "sgdhfgsfhdsgfhsgfs",
+                "DID" : "did:web:essif.iao.fraunhofer.de"
+              }
+            },
+            "AdditionalServiceInformation" : {
+              "ServiceBusinessRulesURI" : "string",
+              "ServiceGovernanceURI" : "string",
+              "ServiceIssuedCredentialTypes" : {
+                "CredentialType" : [ {
+                  "Type" : "string"
+                }, {
+                  "Type" : "string"
+                } ]
+              },
+              "ServiceContractType" : "string",
+              "ServicePolicySet" : "string",
+              "ServiceSchemaURI" : "string",
+              "ServiceSupplyPoint" : "string"
+            }
+          } ]
+        }
+      } ]
+    }
+  }
+}

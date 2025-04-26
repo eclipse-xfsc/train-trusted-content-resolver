@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "commander": "12.0.0",
+    "trusted-content-resolver-js-client": "../generated"
+  },
+  "description": "JS CLI implementation for JS Trust Content Resolver Client",
+  "license": "MIT",
+  "name": "trusted-content-resolver-js-client-cli",
+  "version": "0.0.0",
+  "scripts": {
+    "cli": "./cli.js"
+  }
+}

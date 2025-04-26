@@ -1,0 +1,1 @@
+{"uri": "https://external.host/tcr", "endpoint": "resolve", "data": "{\"issuer\": \"issuer1\", \"trustSchemePointers\": [\"ptr1\", \"ptr2\"]}"}

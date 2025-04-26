@@ -1,0 +1,254 @@
+# Default values for tcr-service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+name: tcr-service
+replicaCount: 1
+
+image:
+  repository: node-654e3bca7fbeeed18f81d7c7.ps-xaas.io/train/trusted-content-resolver-service
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+#imagePullSecrets: []
+#nameOverride: ""
+fullnameOverride: "tcr-service"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "tcr-service-account"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: 
+  allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8087
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+  hosts:
+    - host: tcr.train1.xfsc.dev
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: tcr-server.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: ingress-secret-name
+      hosts:
+        - tcr.train1.xfsc.dev
+   
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+probes:
+  path: /actuator/health
+  initialDelaySeconds: 30
+  periodSeconds: 30             
+  timeoutSeconds: 5
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+  
+monitoring:
+  enabled: true
+  release: cao-monitoring
+  annotations:
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/scheme: http
+    prometheus.io/scrape: "true"    
+      
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - tcr-service
+          topologyKey: "kubernetes.io/hostname"
+          
+restartPolicy: Always
+
+env: {}
+#  - name: JAVA_TOOL_OPTIONS
+#    value: -javaagent:jacoco-agent.jar
+
+initContainers: {}
+#  - name: jacoco-agent
+#    image: <jacoco-agent-image-name>
+
+volumes:
+  - name: unires-drivers-volume
+    mountPath: /etc/config
+    spec:
+      configMap:
+        name: uni-resolver-drivers-configmap
+#  - name: jacoco-volume
+#    mountPath: /etc/jacoco # directory location within container
+#    spec:
+#      hostPath:
+#        # directory location on host
+#        path: /home/builduser/jenkins/workspace/deploy/config
+#        type: Directory
+      
+application:
+  properties:
+    management:
+      endpoint:
+        configprops:
+          show-values: ALWAYS
+        env:
+          show-values: ALWAYS
+        health:
+          show-details: ALWAYS
+      endpoints:
+        web:
+          exposure:
+            include: "*" 
+      otlp:
+        metrics:
+          export:
+            enabled: false
+            url: http://localhost:4318/v1/metrics
+            step: 10s
+        tracing:
+          endpoint: http://localhost:4318/v1/traces
+          export:
+            step: 10s # Export interval set to 10 seconds
+      tracing:
+        enabled: false
+        sampling:
+          probability: 1.0
+
+    server:
+      port: 8087
+      shutdown: graceful
+
+    spring:
+      application:
+        name: trusted-content-resolver
+      mvc:
+        log-request-details: true
+
+    springdoc:
+      api-docs:
+        path: /api/docs
+        enabled: true
+
+    logging:
+      level:
+        root: INFO
+        eu.xfsc.train.tcr: DEBUG
+    
+    tcr:
+      did:
+        baseUri: http://localhost:8080/1.0
+        configFile: uni-resolver-config.json
+        configPath: /etc/config/${tcr.did.configFile}
+        configMap: uni-resolver-drivers-configmap
+        timeout: 500
+        cache:
+          size: 0
+          timeout: 8H
+      dns:
+        hosts: 1.1.1.1, 8.8.8.8, 8.8.4.4
+        timeout: 500
+        dnssec:
+          enabled: true  #DANE..
+          rootPath: /wrong/path/changed
+      http:
+        timeout: 10
+      tl:
+        cache:
+          size: 0
+          timeout: 8H
+
+uniresolver:
+  drivers:
+    - pattern: "^(did:web:.+)$"
+      url: "http://uni-resolver-driver-did-uport:8081/"
+      testIdentifiers:
+        - "did:web:did.actor:alice"
+        - "did:web:did.actor:bob"
+        - "did:web:did.actor:carol"
+        - "did:web:did.actor:mike"
+    - pattern: "^(did:ethr:.+)$"
+      url: "http://uni-resolver-driver-did-uport:8081/"
+      testIdentifiers:
+        - "did:ethr:0x3b0BC51Ab9De1e5B7B6E34E5b960285805C41736"
+        - "did:ethr:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479"
+        - "did:ethr:0x1:0x3b0BC51Ab9De1e5B7B6E34E5b960285805C41736"
+        - "did:ethr:0x1:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479"
+        - "did:ethr:goerli:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479"
+        - "did:ethr:0x5:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479"
+    - pattern: "^(did:ens:.+)$"
+      url: "http://uni-resolver-driver-did-uport:8081/"
+      testIdentifiers:
+        - "did:ens:vitalik.eth"
+        - "did:ens:goerli:whatever.eth"
+    - pattern: "^(did:peer:.+)$"
+      url: "http://uni-resolver-driver-did-uport:8081/"
+      testIdentifiers:
+        - "did:peer:2.Ez6LSghwSE437wnDE1pt3X6hVDUQzSjsHzinpX3XFvMjRAm7y.Vz6Mkhh1e5CEYYq6JBUcTZ6Cp2ranCWRrv7Yax3Le4N59R6dd.SeyJ0IjoiZG0iLCJzIjoiaHR0cHM6Ly9hbGljZS5kaWQuZm1ncC5hcHAvIiwiciI6W10sImEiOlsiZGlkY29tbS92MiJdfQ"
+        - "did:peer:2.Ez6LSpSrLxbAhg2SHwKk7kwpsH7DM7QjFS5iK6qP87eViohud.Vz6MkqRYqQiSgvZQdnBytw86Qbs2ZWUkGv22od935YF4s8M7V.SeyJ0IjoiZG0iLCJzIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9lbmRwb2ludDEiLCJyIjpbImRpZDpleGFtcGxlOnNvbWVtZWRpYXRvciNzb21la2V5MSJdLCJhIjpbImRpZGNvbW0vdjIiLCJkaWRjb21tL2FpcDI7ZW52PXJmYzU4NyJdfQ"
+    - pattern: "^did:(?:tz:|pkh:|web:|key:(?:z6Mk|zQ3s|zDna|z.{200,})).+$"
+      url: "http://driver-didkit:3000/identifiers/$1"
+      testIdentifiers:
+        - "did:tz:tz1YwA1FwpgLtc1G8DKbbZ6e6PTb1dQMRn5x"
+        - "did:tz:delphinet:tz1WvvbEGpBXGeTVbLiR6DYBe1izmgiYuZbq"
+        - "did:web:identity.foundation"
+        - "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+        - "did:key:zQ3shokFTS3brHcDQrn82RUDfCZESWL1ZdCEJwekUDPQiYBme"
+        - "did:key:zDnaerDaTF5BXEavCrfRZEk316dpbLsfPDZ3WJ5hRTPFU2169"
+        - "did:key:z4MXj1wBzi9jUstyPMS4jQqB6KdJaiatPkAtVtGc6bQEQEEsKTic4G7Rou3iBf9vPmT5dbkm9qsZsuVNjq8HCuW1w24nhBFGkRE4cd2Uf2tfrB3N7h4mnyPp1BF3ZttHTYv3DLUPi1zMdkULiow3M1GfXkoC6DoxDUm1jmN6GBj22SjVsr6dxezRVQc7aj9TxE7JLbMH1wh5X3kA58H3DFW8rnYMakFGbca5CB2Jf6CnGQZmL7o5uJAdTwXfy2iiiyPxXEGerMhHwhjTA1mKYobyk2CpeEcmvynADfNZ5MBvcCS7m3XkFCMNUYBS9NQ3fze6vMSUPsNa6GVYmKx2x6JrdEjCk3qRMMmyjnjCMfR4pXbRMZa3i"
+        - "did:pkh:tz:tz2BFTyPeYRzxd5aiBchbXN3WCZhx7BqbMBq"

@@ -1,0 +1,1 @@
+{"uri": "http://127.0.0.1:8080/tcr/v1", "endpoint": "validate", "data": "{\"issuer\": \"issuer1\", \"did\": \"did:mock:sample-issuer1\", \"endpoints\": [\"https://issuer1.test/trust-list\"]}"}

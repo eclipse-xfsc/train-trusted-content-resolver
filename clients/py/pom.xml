@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eu.xfsc.train</groupId>
+        <artifactId>trusted-content-resolver</artifactId>
+        <version>1.1.0-SNAPSHOT</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <artifactId>trusted-content-resolver-python-client</artifactId>
+    <packaging>pom</packaging>
+    <name>trusted-content-resolver-python-client</name>
+    <description>Eclipse XFSC TRAIN Trust Content Resolver Python client</description>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-trusted-content-resolver-python-client</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <skipValidateSpec>true</skipValidateSpec>
+                            <inputSpec>${project.parent.basedir}/openapi/tcr_openapi.yaml</inputSpec>
+                            <generatorName>python</generatorName>
+                            <generateApis>true</generateApis>
+                            <generateApiTests>true</generateApiTests>
+                            <generateApiDocumentation>true</generateApiDocumentation>
+                            <generateModels>true</generateModels>
+                            <generateModelTests>true</generateModelTests>
+                            <generateModelDocumentation>true</generateModelDocumentation>
+                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <output>src/generated</output>
+                            <cleanupOutput>true</cleanupOutput>
+                            <configOptions>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <generateSourceCodeOnly>false</generateSourceCodeOnly>
+                                <packageName>eu_xfsc_train_tcr</packageName>
+                                <packageVersion>${base.version}-DEV</packageVersion>
+                                <library>requests</library>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create-archive</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>           
+        </plugins>
+    </build>
+
+</project>

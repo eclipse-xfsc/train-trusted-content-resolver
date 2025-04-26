@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  tcr-server:
+#    image: node-654e3bca7fbeeed18f81d7c7.ps-xaas.io/train/trusted-content-resolver-service:latest
+    build:
+      context: ../service
+      dockerfile: Dockerfile
+    environment:
+       TCR_DID_BASE_URI: https://dev.uniresolver.io/1.0
+       TCR_DID_CONFIG_PATH: 
+       TCR_DID_CACHE_SIZE: 100
+       TCR_DID_CACHE_TIMEOUT: 5M
+       TCR_DNS_HOSTS: #1.1.1.1, 8.8.8.8, 8.8.4.4
+       TCR_DNS_TIMEOUT: 5000
+       TCR_DNS_DOH_ENABLED: false
+       TCR_DNS_DNSSEC_ENABLED: false
+       #TCR_DNS_DNSSEC_ROOTPATH:
+       TCR_TL_CACHE_SIZE: 0
+       TCR_TL_CACHE_TIMEOUT: 5M
+    ports:
+      - "8887:8087"
+    networks:
+      - "gaia-x"
+    restart: always #unless-stopped
+        
+networks:
+  gaia-x:
+    driver: "bridge"

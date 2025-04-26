@@ -1,0 +1,55 @@
+{"drivers": [
+  {
+      "testIdentifiers": [
+        "did:web:did.actor:alice",
+        "did:web:did.actor:bob",
+        "did:web:did.actor:carol",
+        "did:web:did.actor:mike"
+      ],
+      "url": "http://uni-resolver-driver-did-uport:8081/",
+      "pattern": "^(did:web:.+)$"
+  },
+  {
+      "testIdentifiers": [
+        "did:ethr:0x3b0BC51Ab9De1e5B7B6E34E5b960285805C41736",
+        "did:ethr:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479",
+        "did:ethr:0x1:0x3b0BC51Ab9De1e5B7B6E34E5b960285805C41736",
+        "did:ethr:0x1:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479",
+        "did:ethr:goerli:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479",
+        "did:ethr:0x5:0x03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479"
+      ],
+      "url": "http://uni-resolver-driver-did-uport:8081/",
+      "pattern": "^(did:ethr:.+)$"
+  },
+  {
+      "testIdentifiers": [
+        "did:ens:vitalik.eth",
+        "did:ens:goerli:whatever.eth"
+      ],
+      "url": "http://uni-resolver-driver-did-uport:8081/",
+      "pattern": "^(did:ens:.+)$"
+  },
+  {
+      "testIdentifiers": [
+        "did:peer:2.Ez6LSghwSE437wnDE1pt3X6hVDUQzSjsHzinpX3XFvMjRAm7y.Vz6Mkhh1e5CEYYq6JBUcTZ6Cp2ranCWRrv7Yax3Le4N59R6dd.SeyJ0IjoiZG0iLCJzIjoiaHR0cHM6Ly9hbGljZS5kaWQuZm1ncC5hcHAvIiwiciI6W10sImEiOlsiZGlkY29tbS92MiJdfQ",
+        "did:peer:2.Ez6LSpSrLxbAhg2SHwKk7kwpsH7DM7QjFS5iK6qP87eViohud.Vz6MkqRYqQiSgvZQdnBytw86Qbs2ZWUkGv22od935YF4s8M7V.SeyJ0IjoiZG0iLCJzIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9lbmRwb2ludDEiLCJyIjpbImRpZDpleGFtcGxlOnNvbWVtZWRpYXRvciNzb21la2V5MSJdLCJhIjpbImRpZGNvbW0vdjIiLCJkaWRjb21tL2FpcDI7ZW52PXJmYzU4NyJdfQ"
+      ],
+      "url": "http://uni-resolver-driver-did-uport:8081/",
+      "pattern": "^(did:peer:.+)$"
+  },
+  {
+      "testIdentifiers": [
+        "did:tz:tz1YwA1FwpgLtc1G8DKbbZ6e6PTb1dQMRn5x",
+        "did:tz:delphinet:tz1WvvbEGpBXGeTVbLiR6DYBe1izmgiYuZbq",
+        "did:web:identity.foundation",
+        "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+        "did:key:zQ3shokFTS3brHcDQrn82RUDfCZESWL1ZdCEJwekUDPQiYBme",
+        "did:key:zDnaerDaTF5BXEavCrfRZEk316dpbLsfPDZ3WJ5hRTPFU2169",
+        "did:key:z4MXj1wBzi9jUstyPMS4jQqB6KdJaiatPkAtVtGc6bQEQEEsKTic4G7Rou3iBf9vPmT5dbkm9qsZsuVNjq8HCuW1w24nhBFGkRE4cd2Uf2tfrB3N7h4mnyPp1BF3ZttHTYv3DLUPi1zMdkULiow3M1GfXkoC6DoxDUm1jmN6GBj22SjVsr6dxezRVQc7aj9TxE7JLbMH1wh5X3kA58H3DFW8rnYMakFGbca5CB2Jf6CnGQZmL7o5uJAdTwXfy2iiiyPxXEGerMhHwhjTA1mKYobyk2CpeEcmvynADfNZ5MBvcCS7m3XkFCMNUYBS9NQ3fze6vMSUPsNa6GVYmKx2x6JrdEjCk3qRMMmyjnjCMfR4pXbRMZa3i",
+        "did:pkh:tz:tz2BFTyPeYRzxd5aiBchbXN3WCZhx7BqbMBq"
+      ],
+      "url": "http://driver-didkit:3000/identifiers/$1",
+      "pattern": "^did:(?:tz:|pkh:|web:|key:(?:z6Mk|zQ3s|zDna|z.{200,})).+$"
+  }
+  ]
+}

@@ -1,0 +1,22 @@
+logging:
+  level:
+    root: INFO
+    eu.xfsc.train.tcr: DEBUG
+    org.springframework.web: INFO
+    org.xbill.DNS: DEBUG
+    
+tcr:
+  did:
+    cache:
+      timeout: 10M
+  dns:
+    hosts: https://dns.google/dns-query
+    timeout: 2000
+    doh:
+      enabled: true
+    dnssec:
+      enabled: true
+  tl:
+    cache:
+      timeout: 10M
+    

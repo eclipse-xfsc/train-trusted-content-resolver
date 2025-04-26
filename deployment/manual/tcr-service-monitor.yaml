@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tcr-service-monitor
+  namespace: cao-monitoring
+  labels:
+    app: tcr-service
+    release: cao-monitoring
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tcr-service
+      release: cao-monitoring
+  namespaceSelector:
+    matchNames:
+      - trust-content-res
+  endpoints:
+    - path: /actuator/prometheus
+      port: http
+      interval: 15s

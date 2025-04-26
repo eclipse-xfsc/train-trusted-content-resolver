@@ -1,0 +1,9 @@
+{{- if .Values.application.properties.tcr.did.configPath -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.application.properties.tcr.did.configMap }}
+data:
+{{ .Values.application.properties.tcr.did.configFile | nindent 2 }}: |-
+{{- toPrettyJson .Values.uniresolver | nindent 4 }}
+{{- end }}

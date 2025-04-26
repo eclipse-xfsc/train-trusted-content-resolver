@@ -1,0 +1,18 @@
+[project]
+name = "eu-xfsc-train-tcr-cli"
+version = "0.0.0"
+
+dependencies = [
+    "click",
+    "eu-xfsc-train-tcr"
+]
+
+[project.scripts]
+"eu-xfsc-train-tcr" = "eu.xfsc.train.tcr_cli:entry_point"
+
+[tool.setuptools.packages.find]
+    #where = ["src/"]
+    include = ["eu.xfsc.train.tcr_cli"]
+
+[tool.setuptools.package-data]
+"eu.xfsc.train.tcr_cli" = ["py.typed"]

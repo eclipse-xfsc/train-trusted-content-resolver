@@ -1,0 +1,25 @@
+# Licenses generated through https://pkg.go.dev/ API
+module name,license
+github.com/cpuguy83/go-md2man/v2,MIT
+github.com/cucumber/gherkin/go/v26,MIT
+github.com/cucumber/godog,MIT
+github.com/cucumber/messages/go/v21,MIT
+github.com/cucumber/messages/go/v22,MIT
+github.com/davecgh/go-spew,ISC
+github.com/gofrs/uuid,MIT
+github.com/hashicorp/go-immutable-radix,MPL-2.0
+github.com/hashicorp/go-memdb,MPL-2.0
+github.com/hashicorp/go-uuid,MPL-2.0
+github.com/hashicorp/golang-lru,MPL-2.0
+github.com/inconshreveable/mousetrap,Apache-2.0
+github.com/kr/pretty,MIT
+github.com/kr/pty,MIT
+github.com/kr/text,MIT
+github.com/pmezard/go-difflib,BSD-3-Clause
+github.com/russross/blackfriday/v2,BSD-2-Clause
+github.com/spf13/cobra,Apache-2.0
+github.com/spf13/pflag,BSD-3-Clause
+github.com/stretchr/objx,MIT
+github.com/stretchr/testify,MIT
+gopkg.in/check.v1,BSD-2-Clause
+gopkg.in/yaml.v3,"Apache-2.0, MIT"

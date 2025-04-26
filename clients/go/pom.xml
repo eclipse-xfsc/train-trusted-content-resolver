@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+    <parent>
+        <groupId>eu.xfsc.train</groupId>
+        <artifactId>trusted-content-resolver</artifactId>
+        <version>1.1.0-SNAPSHOT</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <artifactId>trusted-content-resolver-go-client</artifactId>
+    <packaging>mvn-golang</packaging>
+    <name>trusted-content-resolver-go-client</name>
+    <description>Eclipse XFSC TRAIN Trust Content Resolver Golang client</description>
+  
+    <url>https://github.com/raydac/mvn-golang</url>
+
+    <properties>
+        <mvn.golang.go.version>1.21.5</mvn.golang.go.version>
+        <mvn.golang.get.packages.file>${basedir}${file.separator}packages.txt</mvn.golang.get.packages.file>
+        <go.wrapper.plugin.version>2.3.10</go.wrapper.plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+        <final.extension>.bin</final.extension>
+    </properties>
+
+    <build>
+        <defaultGoal>clean package</defaultGoal>
+        <finalName>${project.artifactId}${final.extension}</finalName>
+        <sourceDirectory>${basedir}${file.separator}tcr</sourceDirectory>
+        <directory>${basedir}${file.separator}bin</directory>
+        <resources>
+            <resource>
+                <directory>${basedir}${file.separator}res</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-trusted-content-resolver-go-client</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <skipValidateSpec>false</skipValidateSpec>
+                            <inputSpec>${project.parent.basedir}/openapi/tcr_openapi.yaml</inputSpec>
+                            <gitHost>gitlab.eclipse.org</gitHost>
+                            <gitUserId>eclipse/xfsc/train</gitUserId>
+                            <gitRepoId>${project.parent.name}/clients/go/tcr</gitRepoId>
+                            
+                            <generatorName>go</generatorName>
+                            <generateApis>true</generateApis>
+                            <generateApiTests>false</generateApiTests>
+                            <generateApiDocumentation>true</generateApiDocumentation>
+                            <generateModels>true</generateModels>
+                            <generateModelTests>false</generateModelTests>
+                            <generateModelDocumentation>true</generateModelDocumentation>
+                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <output>tcr</output>
+                            <cleanupOutput>true</cleanupOutput>
+                            <configOptions>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <isGoSubmodule>false</isGoSubmodule> 
+                                <generateInterfaces>true</generateInterfaces>
+                                <packageName>tcr</packageName>
+                                <packageVersion>${project.version}</packageVersion>
+                                <withGoMod>false</withGoMod>
+                                <withXml>false</withXml>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.igormaznitsa</groupId>
+                <artifactId>mvn-golang-wrapper</artifactId>
+                <version>${go.wrapper.plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <!--<goPath>${basedir}</goPath>-->
+                    <!--<enforceGoPathToEnd>true</enforceGoPathToEnd>-->
+                    <!--<verbose>true</verbose>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-build</id>
+                        <configuration>
+                            <packages>
+                                <package>${project.basedir}/cmd/main.go</package>
+                            </packages>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,4 @@
+github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
+github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+goa.design/goa/v3 v3.12.3 h1:LHQDUp7t67Ml8pyQc1ywSa14eQ3JaTUBESMgOKF19bI=
+goa.design/goa/v3 v3.12.3/go.mod h1:y78cWNxip293j/ut0fvu8FH+s61ojHKyLbTQumk+BB4=
