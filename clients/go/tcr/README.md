@@ -21,7 +21,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import tcr "github.com/eclipse-xfsc/train-trusted-content-resolver/clients/go/tcr"
+import tcr "gitlab.eclipse.org/eclipse/xfsc/train/trusted-content-resolver/clients/go/tcr"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:

@@ -21,11 +21,11 @@ type KnownServiceEndpointType string
 
 // List of KnownServiceEndpointType
 const (
-	ISSUER      KnownServiceEndpointType = "gx-trust-list-issuer"
-	SCHEMAS     KnownServiceEndpointType = "gx-trust-list-schemas"
-	POLICIES    KnownServiceEndpointType = "gx-trust-list-policies"
-	APPS        KnownServiceEndpointType = "gx-trust-list-apps"
-	VERIFIER    KnownServiceEndpointType = "gx-trust-list-verifier"
+	ISSUER KnownServiceEndpointType = "gx-trust-list-issuer"
+	SCHEMAS KnownServiceEndpointType = "gx-trust-list-schemas"
+	POLICIES KnownServiceEndpointType = "gx-trust-list-policies"
+	APPS KnownServiceEndpointType = "gx-trust-list-apps"
+	VERIFIER KnownServiceEndpointType = "gx-trust-list-verifier"
 	AUTHORITIES KnownServiceEndpointType = "gx-trust-list-authorities"
 )
 
@@ -117,3 +117,4 @@ func (v *NullableKnownServiceEndpointType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -19,15 +19,16 @@ import (
 	"net/url"
 )
 
+
 type TrustedContentResolverAPI interface {
 
 	/*
-		ResolveTrustList Verification result based on issuer & trust scheme pointers
+	ResolveTrustList Verification result based on issuer & trust scheme pointers
 
-		Returns a Verification result from TCR
+	Returns a Verification result from TCR
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiResolveTrustListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiResolveTrustListRequest
 	*/
 	ResolveTrustList(ctx context.Context) ApiResolveTrustListRequest
 
@@ -36,12 +37,12 @@ type TrustedContentResolverAPI interface {
 	ResolveTrustListExecute(r ApiResolveTrustListRequest) (*ResolveResponse, *http.Response, error)
 
 	/*
-		ValidateTrustList Validation result based on /resolve output
+	ValidateTrustList Validation result based on /resolve output
 
-		Returns a Validation result from TCR
+	Returns a Validation result from TCR
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiValidateTrustListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiValidateTrustListRequest
 	*/
 	ValidateTrustList(ctx context.Context) ApiValidateTrustListRequest
 
@@ -54,8 +55,8 @@ type TrustedContentResolverAPI interface {
 type TrustedContentResolverAPIService service
 
 type ApiResolveTrustListRequest struct {
-	ctx            context.Context
-	ApiService     TrustedContentResolverAPI
+	ctx context.Context
+	ApiService TrustedContentResolverAPI
 	resolveRequest *ResolveRequest
 }
 
@@ -74,25 +75,24 @@ ResolveTrustList Verification result based on issuer & trust scheme pointers
 
 Returns a Verification result from TCR
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiResolveTrustListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiResolveTrustListRequest
 */
 func (a *TrustedContentResolverAPIService) ResolveTrustList(ctx context.Context) ApiResolveTrustListRequest {
 	return ApiResolveTrustListRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResolveResponse
+//  @return ResolveResponse
 func (a *TrustedContentResolverAPIService) ResolveTrustListExecute(r ApiResolveTrustListRequest) (*ResolveResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResolveResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResolveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrustedContentResolverAPIService.ResolveTrustList")
@@ -157,8 +157,8 @@ func (a *TrustedContentResolverAPIService) ResolveTrustListExecute(r ApiResolveT
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -168,8 +168,8 @@ func (a *TrustedContentResolverAPIService) ResolveTrustListExecute(r ApiResolveT
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 502 {
@@ -179,8 +179,8 @@ func (a *TrustedContentResolverAPIService) ResolveTrustListExecute(r ApiResolveT
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 510 {
@@ -190,8 +190,8 @@ func (a *TrustedContentResolverAPIService) ResolveTrustListExecute(r ApiResolveT
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -209,8 +209,8 @@ func (a *TrustedContentResolverAPIService) ResolveTrustListExecute(r ApiResolveT
 }
 
 type ApiValidateTrustListRequest struct {
-	ctx             context.Context
-	ApiService      TrustedContentResolverAPI
+	ctx context.Context
+	ApiService TrustedContentResolverAPI
 	validateRequest *ValidateRequest
 }
 
@@ -229,25 +229,24 @@ ValidateTrustList Validation result based on /resolve output
 
 Returns a Validation result from TCR
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiValidateTrustListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiValidateTrustListRequest
 */
 func (a *TrustedContentResolverAPIService) ValidateTrustList(ctx context.Context) ApiValidateTrustListRequest {
 	return ApiValidateTrustListRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ValidateResponse
+//  @return ValidateResponse
 func (a *TrustedContentResolverAPIService) ValidateTrustListExecute(r ApiValidateTrustListRequest) (*ValidateResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ValidateResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ValidateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrustedContentResolverAPIService.ValidateTrustList")
@@ -312,8 +311,8 @@ func (a *TrustedContentResolverAPIService) ValidateTrustListExecute(r ApiValidat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -323,8 +322,8 @@ func (a *TrustedContentResolverAPIService) ValidateTrustListExecute(r ApiValidat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 510 {
@@ -334,8 +333,8 @@ func (a *TrustedContentResolverAPIService) ValidateTrustListExecute(r ApiValidat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

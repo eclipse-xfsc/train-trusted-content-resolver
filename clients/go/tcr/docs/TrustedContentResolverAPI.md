@@ -26,7 +26,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/eclipse-xfsc/train-trusted-content-resolver/clients/go/tcr"
+    openapiclient "gitlab.eclipse.org/eclipse/xfsc/train/trusted-content-resolver/clients/go/tcr"
 )
 
 func main() {
@@ -92,7 +92,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/eclipse-xfsc/train-trusted-content-resolver/clients/go/tcr"
+    openapiclient "gitlab.eclipse.org/eclipse/xfsc/train/trusted-content-resolver/clients/go/tcr"
 )
 
 func main() {

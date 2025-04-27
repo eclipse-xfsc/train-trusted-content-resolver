@@ -131,7 +131,7 @@ func (o *ResolvedDoc) SetDidVerified(v bool) {
 }
 
 func (o ResolvedDoc) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -149,7 +149,7 @@ func (o ResolvedDoc) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ResolvedDoc) UnmarshalJSON(bytes []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
+    // This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
@@ -162,10 +162,10 @@ func (o *ResolvedDoc) UnmarshalJSON(bytes []byte) (err error) {
 	err = json.Unmarshal(bytes, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -219,3 +219,5 @@ func (v *NullableResolvedDoc) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
