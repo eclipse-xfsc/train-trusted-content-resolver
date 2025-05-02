@@ -20,3 +20,9 @@ jobs:
     with: 
       buildContext:  "deployment/helm/tcr-service"
       harbor_config: "deployment/harbor.config"
+  client-lib:
+    uses: eclipse-xfsc/dev-ops/.github/workflows/docker-maven.yml@main
+    with:
+      java_version: '18'
+      folder: clients/java
+      deploy_mode: jar

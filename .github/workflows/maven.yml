@@ -7,8 +7,6 @@ on:
 
 jobs:
   maven-build:
-    uses: eclipse-xfsc/dev-ops/.github/workflows/docker-maven.yml@main
+    uses: eclipse-xfsc/dev-ops/.github/workflows/maven-build.yml@main
     with:
       java_version: '18'
-      folder: clients/java
-      deploy_mode: jar
