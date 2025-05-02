@@ -7,11 +7,16 @@ on:
   
 jobs:
   dockerbuild:
-    uses: eclipse-xfsc/dev-ops/.github/workflows/docker-maven.yml@main
-    with:
-      harbor_config: "deployment/harbor.config"
-  helm:
-    uses: eclipse-xfsc/dev-ops/.github/workflows/helm.yml@main
+    uses: eclipse-xfsc/dev-ops/.github/workflows/dockerbuild.yml@main
+    secrets: inherit
     with: 
-      buildContext:  "deployment/helm"
+      dockerfile: service/Dockerfile
+      buildContext: service
+      harbor_config: "deployment/harbor.config"
+      repo_name: trusted-content-resolver-service
+  helm-tcr-service:
+    uses: eclipse-xfsc/dev-ops/.github/workflows/helm.yml@main
+    secrets: inherit
+    with: 
+      buildContext:  "deployment/helm/tcr-service"
       harbor_config: "deployment/harbor.config"
