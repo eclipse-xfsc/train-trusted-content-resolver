@@ -14,5 +14,6 @@ permissions:
 jobs:
   call-remote-dash-workflow:
     uses: eclipse-xfsc/dev-ops/.github/workflows/eclipse-dash-licence-maven.yml@main
+    secrets: inherit
     with: 
       java_version: '18'
