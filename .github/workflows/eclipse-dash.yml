@@ -7,6 +7,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   call-remote-dash-workflow:
     uses: eclipse-xfsc/dev-ops/.github/workflows/eclipse-dash-licence-maven.yml@main
